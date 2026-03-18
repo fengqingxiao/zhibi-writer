@@ -135,6 +135,46 @@ sealed class Screen(
         outlinedIcon = Icons.Outlined.FormatAlignLeft
     )
     
+    // 发布管理
+    data object PlatformManage : Screen(
+        route = "publish/platforms",
+        title = "平台管理",
+        icon = Icons.Filled.CloudUpload,
+        outlinedIcon = Icons.Outlined.CloudUpload
+    )
+    
+    data object Publish : Screen(
+        route = "publish/{workId}",
+        title = "发布管理",
+        icon = Icons.Filled.Publish,
+        outlinedIcon = Icons.Outlined.Publish
+    ) {
+        fun createRoute(workId: Long) = "publish/$workId"
+        
+        val navArguments = listOf(
+            androidx.navigation.NavArgument("workId") {
+                type = androidx.navigation.NavType.LongType
+                defaultValue = 0L
+            }
+        )
+    }
+    
+    data object Stats : Screen(
+        route = "stats/{workId}",
+        title = "数据统计",
+        icon = Icons.Filled.BarChart,
+        outlinedIcon = Icons.Outlined.BarChart
+    ) {
+        fun createRoute(workId: Long) = "stats/$workId"
+        
+        val navArguments = listOf(
+            androidx.navigation.NavArgument("workId") {
+                type = androidx.navigation.NavType.LongType
+                defaultValue = 0L
+            }
+        )
+    }
+    
     companion object {
         val bottomScreens = listOf(Home, Outline, Material, Settings)
     }

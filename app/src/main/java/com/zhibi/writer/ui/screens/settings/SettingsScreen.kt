@@ -16,7 +16,9 @@ import androidx.compose.ui.unit.dp
 fun SettingsScreen(
     onNavigateToSensitiveWord: () -> Unit = {},
     onNavigateToNameGenerator: () -> Unit = {},
-    onNavigateToTextFormat: () -> Unit = {}
+    onNavigateToTextFormat: () -> Unit = {},
+    onNavigateToPlatformManage: () -> Unit = {},
+    onNavigateToStats: () -> Unit = {}
 ) {
     var darkTheme by remember { mutableStateOf(false) }
     var eyeCareMode by remember { mutableStateOf(false) }
@@ -193,16 +195,30 @@ fun SettingsScreen(
             ) {
                 Column {
                     SettingItemSimple(
+                        title = "平台管理",
+                        subtitle = "绑定平台账号，一键发布",
+                        icon = Icons.Default.CloudUpload,
+                        onClick = onNavigateToPlatformManage
+                    )
+                    HorizontalDivider()
+                    SettingItemSimple(
+                        title = "数据统计",
+                        subtitle = "查看写作数据和稿费收入",
+                        icon = Icons.Default.BarChart,
+                        onClick = onNavigateToStats
+                    )
+                    HorizontalDivider()
+                    SettingItemSimple(
                         title = "备份数据",
                         subtitle = "导出所有作品到本地",
-                        icon = Icons.Default.CloudUpload,
+                        icon = Icons.Default.Backup,
                         onClick = { /* TODO */ }
                     )
                     HorizontalDivider()
                     SettingItemSimple(
                         title = "恢复数据",
                         subtitle = "从备份文件恢复",
-                        icon = Icons.Default.CloudDownload,
+                        icon = Icons.Default.Restore,
                         onClick = { /* TODO */ }
                     )
                     HorizontalDivider()

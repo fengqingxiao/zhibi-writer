@@ -19,6 +19,9 @@ import com.zhibi.writer.ui.screens.chapters.ChapterListScreen
 import com.zhibi.writer.ui.screens.tools.SensitiveWordScreen
 import com.zhibi.writer.ui.screens.tools.NameGeneratorScreen
 import com.zhibi.writer.ui.screens.tools.TextFormatScreen
+import com.zhibi.writer.ui.screens.publish.PlatformManageScreen
+import com.zhibi.writer.ui.screens.publish.PublishScreen
+import com.zhibi.writer.ui.screens.stats.StatsScreen
 
 /**
  * 执笔写作主应用
@@ -97,6 +100,12 @@ fun ZhibiWriterApp(
                     },
                     onNavigateToTextFormat = {
                         navController.navigate(Screen.TextFormat.route)
+                    },
+                    onNavigateToPlatformManage = {
+                        navController.navigate(Screen.PlatformManage.route)
+                    },
+                    onNavigateToStats = {
+                        navController.navigate(Screen.Stats.createRoute(0))
                     }
                 )
             }
@@ -149,6 +158,36 @@ fun ZhibiWriterApp(
             
             composable(Screen.TextFormat.route) {
                 TextFormatScreen(
+                    onNavigateBack = { navController.popBackStack() }
+                )
+            }
+            
+            // 发布管理
+            composable(Screen.PlatformManage.route) {
+                PlatformManageScreen(
+                    onNavigateBack = { navController.popBackStack() }
+                )
+            }
+            
+            composable(
+                route = Screen.Publish.route,
+                arguments = Screen.Publish.navArguments
+            ) { backStackEntry ->
+                val workId = backStackEntry.arguments?.getLong("workId") ?: 0L
+                PublishScreen(
+                    workId = workId,
+                    onNavigateBack = { navController.popBackStack() }
+                )
+            }
+            
+            // 数据统计
+            composable(
+                route = Screen.Stats.route,
+                arguments = Screen.Stats.navArguments
+            ) { backStackEntry ->
+                val workId = backStackEntry.arguments?.getLong("workId") ?: 0L
+                StatsScreen(
+                    workId = workId,
                     onNavigateBack = { navController.popBackStack() }
                 )
             }
