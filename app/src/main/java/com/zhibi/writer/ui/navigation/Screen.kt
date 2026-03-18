@@ -113,6 +113,28 @@ sealed class Screen(
         fun createRoute(workId: Long) = "new_chapter/$workId"
     }
     
+    // 创作工具
+    data object SensitiveWord : Screen(
+        route = "tools/sensitive_word",
+        title = "敏感词检测",
+        icon = Icons.Filled.Warning,
+        outlinedIcon = Icons.Outlined.Warning
+    )
+    
+    data object NameGenerator : Screen(
+        route = "tools/name_generator",
+        title = "随机取名",
+        icon = Icons.Filled.AutoAwesome,
+        outlinedIcon = Icons.Outlined.AutoAwesome
+    )
+    
+    data object TextFormat : Screen(
+        route = "tools/text_format",
+        title = "一键排版",
+        icon = Icons.Filled.FormatAlignLeft,
+        outlinedIcon = Icons.Outlined.FormatAlignLeft
+    )
+    
     companion object {
         val bottomScreens = listOf(Home, Outline, Material, Settings)
     }

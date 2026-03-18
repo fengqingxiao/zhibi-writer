@@ -13,7 +13,11 @@ import androidx.compose.ui.unit.dp
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(
+    onNavigateToSensitiveWord: () -> Unit = {},
+    onNavigateToNameGenerator: () -> Unit = {},
+    onNavigateToTextFormat: () -> Unit = {}
+) {
     var darkTheme by remember { mutableStateOf(false) }
     var eyeCareMode by remember { mutableStateOf(false) }
     var autoSave by remember { mutableStateOf(true) }
@@ -129,6 +133,45 @@ fun SettingsScreen() {
                         icon = Icons.Default.Save,
                         checked = autoSave,
                         onCheckedChange = { autoSave = it }
+                    )
+                }
+            }
+            
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            // 创作工具
+            Text(
+                text = "创作工具",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            )
+            
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            ) {
+                Column {
+                    SettingItemSimple(
+                        title = "敏感词检测",
+                        subtitle = "检测文本中的敏感词",
+                        icon = Icons.Default.Warning,
+                        onClick = onNavigateToSensitiveWord
+                    )
+                    HorizontalDivider()
+                    SettingItemSimple(
+                        title = "随机取名",
+                        subtitle = "生成姓名、地点、功法等名称",
+                        icon = Icons.Default.AutoAwesome,
+                        onClick = onNavigateToNameGenerator
+                    )
+                    HorizontalDivider()
+                    SettingItemSimple(
+                        title = "一键排版",
+                        subtitle = "适配各平台格式要求",
+                        icon = Icons.Default.FormatAlignLeft,
+                        onClick = onNavigateToTextFormat
                     )
                 }
             }

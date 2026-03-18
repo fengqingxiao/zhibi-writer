@@ -16,6 +16,9 @@ import com.zhibi.writer.ui.screens.material.MaterialScreen
 import com.zhibi.writer.ui.screens.settings.SettingsScreen
 import com.zhibi.writer.ui.screens.editor.EditorScreen
 import com.zhibi.writer.ui.screens.chapters.ChapterListScreen
+import com.zhibi.writer.ui.screens.tools.SensitiveWordScreen
+import com.zhibi.writer.ui.screens.tools.NameGeneratorScreen
+import com.zhibi.writer.ui.screens.tools.TextFormatScreen
 
 /**
  * 执笔写作主应用
@@ -85,7 +88,17 @@ fun ZhibiWriterApp(
             }
             
             composable(Screen.Settings.route) {
-                SettingsScreen()
+                SettingsScreen(
+                    onNavigateToSensitiveWord = {
+                        navController.navigate(Screen.SensitiveWord.route)
+                    },
+                    onNavigateToNameGenerator = {
+                        navController.navigate(Screen.NameGenerator.route)
+                    },
+                    onNavigateToTextFormat = {
+                        navController.navigate(Screen.TextFormat.route)
+                    }
+                )
             }
             
             composable(
@@ -118,6 +131,25 @@ fun ZhibiWriterApp(
                     onNavigateBack = {
                         navController.popBackStack()
                     }
+                )
+            }
+            
+            // 创作工具
+            composable(Screen.SensitiveWord.route) {
+                SensitiveWordScreen(
+                    onNavigateBack = { navController.popBackStack() }
+                )
+            }
+            
+            composable(Screen.NameGenerator.route) {
+                NameGeneratorScreen(
+                    onNavigateBack = { navController.popBackStack() }
+                )
+            }
+            
+            composable(Screen.TextFormat.route) {
+                TextFormatScreen(
+                    onNavigateBack = { navController.popBackStack() }
                 )
             }
         }
