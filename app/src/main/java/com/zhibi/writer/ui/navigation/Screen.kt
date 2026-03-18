@@ -86,6 +86,13 @@ sealed class Screen(
         outlinedIcon = Icons.Outlined.List
     ) {
         fun createRoute(workId: Long) = "chapters/$workId"
+        
+        val navArguments = listOf(
+            androidx.navigation.NavArgument("workId") {
+                type = androidx.navigation.NavType.LongType
+                defaultValue = 0L
+            }
+        )
     }
     
     // 新建作品

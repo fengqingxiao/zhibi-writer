@@ -15,6 +15,7 @@ import com.zhibi.writer.ui.screens.outline.OutlineScreen
 import com.zhibi.writer.ui.screens.material.MaterialScreen
 import com.zhibi.writer.ui.screens.settings.SettingsScreen
 import com.zhibi.writer.ui.screens.editor.EditorScreen
+import com.zhibi.writer.ui.screens.chapters.ChapterListScreen
 
 /**
  * 执笔写作主应用
@@ -64,6 +65,9 @@ fun ZhibiWriterApp(
                     },
                     onNavigateToOutline = { workId ->
                         navController.navigate(Screen.Outline.createRoute(workId))
+                    },
+                    onNavigateToChapters = { workId ->
+                        navController.navigate(Screen.ChapterList.createRoute(workId))
                     }
                 )
             }
@@ -94,6 +98,23 @@ fun ZhibiWriterApp(
                 EditorScreen(
                     workId = workId,
                     chapterId = chapterId,
+                    onNavigateBack = {
+                        navController.popBackStack()
+                    }
+                )
+            }
+            
+            composable(
+                route = Screen.ChapterList.route,
+                arguments = Screen.ChapterList.navArguments
+            ) { backStackEntry ->
+                val workId = backStackEntry.arguments?.getLong("workId") ?: 0L
+                
+                ChapterListScreen(
+                    workId = workId,
+                    onNavigateToEditor = { wId, cId ->
+                        navController.navigate(Screen.Editor.createRoute(wId, cId))
+                    },
                     onNavigateBack = {
                         navController.popBackStack()
                     }

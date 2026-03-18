@@ -24,7 +24,8 @@ import java.time.format.DateTimeFormatter
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     onNavigateToEditor: (Long, Long) -> Unit,
-    onNavigateToOutline: (Long) -> Unit
+    onNavigateToOutline: (Long) -> Unit,
+    onNavigateToChapters: (Long) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     var showNewWorkDialog by remember { mutableStateOf(false) }
@@ -122,7 +123,7 @@ fun HomeScreen(
                         WorkCard(
                             work = work,
                             onClick = {
-                                onNavigateToEditor(work.id, 0)
+                                onNavigateToChapters(work.id)
                             },
                             onLongClick = {
                                 // TODO: 显示操作菜单
